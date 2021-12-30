@@ -15,12 +15,12 @@ data "oci_core_subnets" "test_subnets" {
 }
 
 // List images in Oracle Cloud Infrastructure Core service.
-data "oci_core_images" "CentOS-7" {
+data "oci_core_images" "ubuntu-18-04" {
   compartment_id = var.compartment_ocid
-  operating_system = "CentOS"
+  operating_system = "Canonical Ubuntu"
   filter {
     name = "display_name"
-    values = ["^CentOS-7-([\\.0-9-]+)$"]
+    values = ["^Canonical-Ubuntu-18.04-([\\.0-9-]+)$"]
     regex = true
   }
 }
@@ -49,7 +49,7 @@ resource "oci_core_instance" "test-VM" {
   }
   
     source_details {
-        source_id = "${data.oci_core_images.CentOS-7.images.0.id}"
+        source_id = "${data.oci_core_images.ubuntu-18-04.images.0.id}"
         source_type = "image"
         boot_volume_size_in_gbs = "200"
     }
@@ -59,12 +59,12 @@ output "VM_Private_IP" {
   value = "${oci_core_instance.test-VM.private_ip}"
 }
 
-output "CentOS-7-latest-name" {
-  value = data.oci_core_images.CentOS-7.images.0.display_name
+output "ubuntu-18-04-latest-name" {
+  value = data.oci_core_images.ubuntu-18-04.images.0.display_name
 }
 
-output "CentOS-7-latest-id" {
-  value = data.oci_core_images.CentOS-7.images.0.id
+output "ubuntu-18-04-latest-id" {
+  value = data.oci_core_images.ubuntu-18-04.images.0.id
 }
 
 output "subnet_id" {
