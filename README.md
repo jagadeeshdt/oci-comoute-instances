@@ -1,4 +1,4 @@
-# oci-comoute-instances
+# oci-compute-instances
 To create the instance on the OCI
 [
 ![Deploy to Oracle Cloud]
