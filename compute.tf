@@ -36,7 +36,7 @@ resource "oci_core_instance" "test-VM" {
   display_name        = "securiti-${random_id.instance_id.hex}-test-VM"
   shape               = "${var.InstanceShape}"
    metadata = {
-    ssh_authorized_keys = file(var.ssh_public_key_path)
+    #ssh_authorized_keys = file(var.ssh_public_key_path)
     user_data = base64encode(file("./cloud-init_script.sh"))
    }
   
